@@ -11,6 +11,10 @@ export class API {
     return get(this.baseURL + 'colognes').json();
   }
 
+  getCologne(cologne: string) {
+    return get(this.baseURL + 'cologne/' + cologne).json();
+  }
+
   insertCologne(name: string, manufacturer: string, purchased: boolean, purchasedQuantity?: number) {
     const formData = new FormData();
     formData.append('name', name);

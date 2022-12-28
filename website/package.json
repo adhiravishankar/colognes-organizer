@@ -13,6 +13,7 @@
     "@tkrotoff/fetch": "^0.15.0",
     "bootstrap": "^5.2.3",
     "filepond": "^4.30.4",
+    "material-colors": "^1.2.6",
     "mobx": "^6.7.0",
     "mobx-react-lite": "^3.4.0",
     "queue-typescript": "^1.0.1",

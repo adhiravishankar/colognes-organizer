@@ -8,16 +8,22 @@ export interface NavBarProps {
 
   editIcon: boolean;
 
+  onAdd: () => void;
+
   onEdit?: () => void;
 }
 
 export function NavBar(props: NavBarProps) {
-  const { editIcon, id, name, onEdit } = props;
+  const { editIcon, id, name, onAdd, onEdit } = props;
   const onClick = useCallback(() => {
     onEdit();
   }, [onEdit, id]);
 
-  const addIconJSX = <Nav.Item><i className="fas fa-plus" /></Nav.Item>;
+  const addHandler = useCallback(() => {
+    onAdd();
+  }, [onAdd, id]);
+
+  const addIconJSX = <Nav.Item onClick={ addHandler }><i className="fas fa-plus" /></Nav.Item>;
   const editIconJSX = editIcon ? <Nav.Item onClick={ onClick }><i className="fas fa-pen" /></Nav.Item> : null;
 
   return (

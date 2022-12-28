@@ -9,3 +9,21 @@
   margin-top: auto;
   margin-bottom: auto;
 }
+
+.colognes-container {
+  margin-top: 2rem;
+}
+
+.colognes-list .no-image-item .image {
+  height: 14rem;
+}
+
+.no-image-item .image {
+  display: flex;
+  color: white;
+}
+
+.no-image-item .image i {
+  margin: auto;
+  font-size: 5rem;
+}

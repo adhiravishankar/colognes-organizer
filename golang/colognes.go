@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"log"
 	"strconv"
 )
@@ -48,7 +49,19 @@ func createCologne(c *gin.Context) {
 }
 
 func getCologne(c *gin.Context) {
+	colognesCollection := mongoDB.Collection("colognes")
+	objectId, err := primitive.ObjectIDFromHex(c.Param("cologne"))
+	if err != nil {
+		log.Fatal(err)
+	}
 
+	var result = colognesCollection.FindOne(c, bson.M{"_id": objectId})
+	cologne := Cologne{}
+	err = result.Decode(&cologne)
+	if err != nil {
+		log.Fatal(err)
+	}
+	c.JSON(200, &cologne)
 }
 
 func updateCologne(c *gin.Context) {
