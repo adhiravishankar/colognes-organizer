@@ -1,5 +1,6 @@
+import { AddCologne } from './pages/AddCologne';
 
 
 export function App() {
-  return (<div>App</div>);
+  return (<AddCologne />);
 }

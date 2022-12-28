@@ -39,6 +39,11 @@ func main() {
 	router.POST("/colognes/:cologne/attributes", addAttributes)
 	router.DELETE("/colognes/:cologne/attributes", deleteAttributes)
 	router.GET("/search", searchAttributes)
+
+	err = router.Run(":9001")
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func connectToMongo() {
