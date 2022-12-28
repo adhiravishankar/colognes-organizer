@@ -1,6 +1,7 @@
 package main
 
 type Cologne struct {
+	Id                string `bson:"_id"`
 	Name              string `bson:"name"`
 	Manufacturer      string `bson:"manufacturer,omitempty"`
 	Purchased         bool   `bson:"purchased,omitempty"`

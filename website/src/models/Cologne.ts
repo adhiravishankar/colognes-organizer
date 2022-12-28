@@ -1,6 +1,8 @@
 
 
 export interface Cologne {
+  Id: string;
+
   Name: string;
 
   Manufacturer: string;

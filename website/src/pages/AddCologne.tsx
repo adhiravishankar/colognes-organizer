@@ -1,18 +1,23 @@
-import {Fragment, useCallback} from 'react';
+import { observer } from 'mobx-react-lite';
+import { Fragment, useCallback } from 'react';
 import { Button, Card, Col, Container, Form, Row, Stack } from 'react-bootstrap';
 import { Controller, useController, useForm } from 'react-hook-form';
 
 import { NavBar } from '../components/NavBar';
 import { Cologne } from '../models/Cologne';
-import {insertCologne} from "../api/API";
+import { AppStore } from '../stores/AppStore';
 
+export interface AddCologneProps {
+  store: AppStore;
+}
 
-export function AddCologne() {
+export const AddCologne = observer<AddCologneProps>((props: AddCologneProps) => {
+  const { store } = props;
   const { handleSubmit, control } = useForm<Cologne>();
   const purchasedController = useController({ name: 'Purchased', control });
   const disabledPurchased: boolean = !purchasedController.field.value;
 
-  const onSubmit = useCallback((data: Cologne) => insertCologne(data.Name, data.Manufacturer, data.Purchased, data.PurchasedQuantity), []);
+  const onSubmit = useCallback((data: Cologne) => store.api.insertCologne(data.Name, data.Manufacturer, data.Purchased, data.PurchasedQuantity), []);
 
   return (
     <Fragment>
@@ -47,5 +52,5 @@ export function AddCologne() {
       </Container>
     </Fragment>
   );
-}
+});
 
