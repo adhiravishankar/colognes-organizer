@@ -12,7 +12,7 @@ export class API {
   }
 
   getCologne(cologne: string) {
-    return get(this.baseURL + 'cologne/' + cologne).json();
+    return get(this.baseURL + 'colognes/' + cologne).json();
   }
 
   insertCologne(name: string, manufacturer: string, purchased: boolean, purchasedQuantity?: number) {

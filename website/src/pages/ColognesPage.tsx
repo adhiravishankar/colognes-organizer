@@ -21,9 +21,7 @@ export const ColognesPage = observer<ColognesPageProps>((props: ColognesPageProp
   const colognesJSX: JSX.Element[] = [];
   const onAdd = useCallback(() => store.setAddModalShown(true), [store]);
 
-  const onClick = useCallback((id: string) => {
-    navigation('/colognes/' + id);
-  }, [store]);
+  const onClick = useCallback((id: string) => navigation('/colognes/' + id), [store]);
   store.colognes.forEach((cologne: Cologne) => colognesJSX.push(<LabeledImageItem onClick={ onClick } name={ cologne.Name } id={ cologne.Id } />));
 
   return (

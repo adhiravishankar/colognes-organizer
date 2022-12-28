@@ -20,6 +20,7 @@ export class AppStore {
       colognes: observable,
       addModalShown: observable,
       listColognes: flow,
+      getCologne: flow,
       setAddModalShown: action,
     });
   }

@@ -25,7 +25,11 @@ export const AddCologne = observer<AddCologneProps>((props: AddCologneProps) => 
         <Modal.Title>Add Cologne</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Controller name="Name" control={control} render={({ field }) => <Form.Control { ...field } id="Name" placeholder="Name" /> }/>
+        <Form.Group>
+          <Form.Label htmlFor="Name">Name</Form.Label>
+          <Controller name="Name" control={control} render={({ field }) => <Form.Control { ...field } id="Name" placeholder="Name" /> }/>
+          <Form.Text>The name of the cologne</Form.Text>
+        </Form.Group>
         <Controller name="Manufacturer" control={control} render={({ field }) => <Form.Control { ...field } id="Manufacturer" placeholder="Manufacturer" /> }/>
         <Controller name="PurchasedQuantity" control={control} render={({ field }) => <Form.Control { ...field } disabled={ disabledPurchased } id="PurchasedQuantity" placeholder="Purchased Quantity" /> }/>
         <Form.Check type="switch" id="Purchased" placeholder="Purchased" label="Purchased" checked={ purchasedController.field.value } onClick={ purchasedController.field.onChange } onBlur={ purchasedController.field.onBlur } />

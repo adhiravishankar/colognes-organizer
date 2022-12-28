@@ -10,4 +10,8 @@ export interface Cologne {
   Purchased: boolean;
 
   PurchasedQuantity: number;
+
+  Picture: string;
+
+  Notes: string;
 }

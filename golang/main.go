@@ -29,6 +29,7 @@ func main() {
 	router := gin.Default()
 	router.Use(CORSMiddleware())
 
+	// Colognes
 	router.GET("/colognes", listColognes)
 	router.POST("/colognes", createCologne)
 	router.GET("/colognes/:cologne", getCologne)

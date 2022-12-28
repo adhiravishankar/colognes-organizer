@@ -27,3 +27,14 @@
   margin: auto;
   font-size: 5rem;
 }
+
+.no-featured-image {
+  display: flex;
+  height: 16rem;
+  color: white;
+  font-size: 2rem;
+
+  i {
+    margin: auto;
+  }
+}
