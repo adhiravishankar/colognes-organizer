@@ -2,10 +2,9 @@ import { KyResponse } from 'ky';
 import { action, flow, makeObservable, observable } from 'mobx';
 
 import { API } from '../api/API';
+import { Attribute } from '../models/Attribute';
 import { Cologne } from '../models/Cologne';
 import { DetailedCologne } from '../models/DetailedCologne';
-import {Attributes} from "react";
-import { Attribute } from '../models/Attribute';
 
 
 export class AppStore {
@@ -24,7 +23,7 @@ export class AppStore {
 
   addAttributesModalShown: boolean;
 
-  addedAttributes: string[] = observable.array();
+  addedAttributes: Attribute[] = observable.array();
 
   deleteAttributesModalShown: boolean;
 
@@ -42,7 +41,8 @@ export class AppStore {
       setAddModalShown: action,
       setAddAttributesModalShown: action,
       setDeleteAttributesModalShown: action,
-      deleteChip: action,
+      deleteRecentlyAddedChip: action,
+      deleteAttributeFromCologne: action,
     });
   }
 
@@ -60,11 +60,16 @@ export class AppStore {
   }
 
   *insertCologneAttributes() {
-    const response: KyResponse = yield this.api.insertCologneAttributes(this.selectedCologne.Id, this.addedAttributes);
+    const attributes = this.addedAttributes.map((attr: Attribute) => attr.Attribute);
+    const response: KyResponse = yield this.api.insertCologneAttributes(this.selectedCologne.Id, attributes);
     if (response.ok) {
       this.setAddAttributesModalShown(false);
       return true;
     }
+  }
+
+  deleteAttributeFromCologne(attributeID: string) {
+
   }
 
   setAddModalShown(shown: boolean) {
@@ -79,8 +84,8 @@ export class AppStore {
     this.deleteAttributesModalShown = shown;
   }
 
-  deleteChip(chip: string) {
-    const chipIndex = this.addedAttributes.indexOf(chip);
+  deleteRecentlyAddedChip(chip: string) {
+    const chipIndex = this.addedAttributes.findIndex((attribute: Attribute) => attribute.Attribute.toLowerCase() === chip.toLowerCase());
     this.addedAttributes.splice(chipIndex, 1);
   }
 

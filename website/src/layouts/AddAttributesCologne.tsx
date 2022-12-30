@@ -1,10 +1,10 @@
 import { observer } from 'mobx-react-lite';
 import { useCallback, useRef } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import { useNavigate } from 'react-router';
 
 import { Chips } from '../components/Chips';
 import { AppStore } from '../stores/AppStore';
-import {useNavigate} from "react-router";
 
 export interface AddAttrsCologneProps {
   store: AppStore;
@@ -29,6 +29,7 @@ export const AddAttributesCologne = observer<AddAttrsCologneProps>((props: AddAt
       navigation(0);
     }
   }, [store]);
+  const onDeleteHandler = useCallback((id: string, text: string) => store.deleteRecentlyAddedChip(text), [store]);
 
   return (
     <Modal show={ addAttributesModalShown } onHide={ onHide }>
@@ -43,7 +44,7 @@ export const AddAttributesCologne = observer<AddAttrsCologneProps>((props: AddAt
         </Form.Group>
         <hr />
         <h6>Added Attributes</h6>
-        <Chips store={ store } />
+        <Chips chipDelete={ onDeleteHandler } attributes={ store.addedAttributes } />
         <Button onClick={ onSubmit }>Submit</Button>
       </Modal.Body>
     </Modal>

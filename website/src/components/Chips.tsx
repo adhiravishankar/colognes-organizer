@@ -1,22 +1,23 @@
-import { observer } from 'mobx-react-lite';
+import { useCallback } from 'react';
 
-import { AppStore } from '../stores/AppStore';
-import {useCallback} from "react";
+import { Attribute } from '../models/Attribute';
 import { Chip } from './Chip';
 
 
 export interface ChipsProps {
-  store: AppStore;
+  attributes?: Attribute[];
+
+  chipDelete: (id: string, text: string) => void;
 }
 
 
-export const Chips = observer<ChipsProps>((props: ChipsProps) => {
+export function Chips(props: ChipsProps) {
+  const { attributes, chipDelete } = props;
+  const deleteChipCallback = useCallback((id: string, chip: string) => chipDelete(id, chip), [attributes, chipDelete]);
 
-  const deleteChipCallback = useCallback((chip: string) => props.store.deleteChip(chip), [props.store]);
-
-  const chipsJSX = props.store.addedAttributes.map((chipString: string) => {
-    return <Chip key={ chipString } chipString={ chipString } deleteChip={ deleteChipCallback } />;
+  const chipsJSX = attributes.map((attr: Attribute) => {
+    return <Chip key={ attr.Id } text={ attr.Attribute } chipId={ attr.Id } deleteChip={ deleteChipCallback } />;
   });
 
   return <div className="field is-grouped is-grouped-multiline">{ chipsJSX }</div>;
-});
+}
