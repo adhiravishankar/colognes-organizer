@@ -1,5 +1,5 @@
-@use '../node_modules/bootstrap/scss/bootstrap';
-@use '../node_modules/filepond/dist/filepond.css';
+@use 'file-pond';
+@use 'tag';
 
 .nav-right {
    color: white;
@@ -36,5 +36,15 @@
 
   i {
     margin: auto;
+  }
+}
+
+.icons-card-header {
+  display: flex;
+  justify-content: space-between;
+
+  i {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }

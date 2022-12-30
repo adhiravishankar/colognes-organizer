@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"log"
 	"strconv"
 )
@@ -36,6 +36,7 @@ func createCologne(c *gin.Context) {
 	}
 
 	cologne := Cologne{
+		Id:                uuid.New().String(),
 		Name:              c.PostForm("name"),
 		Manufacturer:      c.PostForm("manufacturer"),
 		Purchased:         purchased,
@@ -50,17 +51,15 @@ func createCologne(c *gin.Context) {
 
 func getCologne(c *gin.Context) {
 	colognesCollection := mongoDB.Collection("colognes")
-	objectId, err := primitive.ObjectIDFromHex(c.Param("cologne"))
+
+	var result = colognesCollection.FindOne(c, bson.M{"_id": c.Param("cologne")})
+	cologne := DetailedCologne{}
+	err := result.Decode(&cologne)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var result = colognesCollection.FindOne(c, bson.M{"_id": objectId})
-	cologne := Cologne{}
-	err = result.Decode(&cologne)
-	if err != nil {
-		log.Fatal(err)
-	}
+	cologne.Attributes = getAttributes(c)
 	c.JSON(200, &cologne)
 }
 

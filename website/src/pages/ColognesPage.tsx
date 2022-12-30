@@ -8,7 +8,7 @@ import { LabeledImageItem } from '../components/LabeledImageItem';
 import { NavBar } from '../components/NavBar';
 import { Cologne } from '../models/Cologne';
 import { AppStore } from '../stores/AppStore';
-import { AddCologne } from './AddCologne';
+import { AddCologne } from '../layouts/AddCologne';
 
 export interface ColognesPageProps {
   store: AppStore;

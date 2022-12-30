@@ -10,6 +10,17 @@ type Cologne struct {
 	Notes             string `bson:"notes,omitempty"`
 }
 
+type DetailedCologne struct {
+	Id                string `bson:"_id"`
+	Name              string `bson:"name"`
+	Manufacturer      string `bson:"manufacturer,omitempty"`
+	Purchased         bool   `bson:"purchased,omitempty"`
+	PurchasedQuantity int64  `bson:"purchased_quantity,omitempty"`
+	Picture           string `bson:"picture,omitempty"`
+	Notes             string `bson:"notes,omitempty"`
+	Attributes        []Attributes
+}
+
 type Attributes struct {
 	Id        string `bson:"_id"`
 	Attribute string `bson:"attribute,omitempty"`

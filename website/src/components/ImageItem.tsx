@@ -8,7 +8,6 @@ export interface ImageItemProps {
 
 export const ImageItem = (image: ImageItemProps) => {
   const { name, source } = image;
-  console.log(name, source);
   if (!(source === null || source === undefined || source === '')) {
     return <img src={source} alt={name} loading="lazy" className="image-item"/>;
   }
