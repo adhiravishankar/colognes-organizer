@@ -5,23 +5,31 @@ import (
 	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson"
 	"log"
+	"strings"
 )
 
 func addAttributes(c *gin.Context) {
 	attributesCollection := mongoDB.Collection("attributes")
 	cologne := c.Param("cologne")
-	attributesArray := c.PostFormArray("attributes")
+
+	var attributesArray []string
+	err := c.BindJSON(&attributesArray)
+	if err != nil {
+		_ = c.AbortWithError(500, err)
+	}
 
 	var attributes []interface{}
 	for _, attribute := range attributesArray {
-		attributes = append(attributes, Attributes{Cologne: cologne, Attribute: attribute, Id: uuid.New().String()})
+		lowerAttribute := strings.ToLower(attribute)
+		id := uuid.New().String()
+		attributes = append(attributes, Attributes{Cologne: cologne, Attribute: lowerAttribute, Id: id})
 	}
 
-	insertManyResult, err := attributesCollection.InsertMany(c, attributes)
+	_, err = attributesCollection.InsertMany(c, attributes)
 	if err != nil {
-		log.Fatal(err)
+		_ = c.AbortWithError(500, err)
 	}
-	c.JSON(200, insertManyResult.InsertedIDs)
+	c.JSON(200, attributes)
 }
 
 func getAttributes(c *gin.Context) []Attributes {
@@ -35,6 +43,7 @@ func getAttributes(c *gin.Context) []Attributes {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	return attributes
 }
 

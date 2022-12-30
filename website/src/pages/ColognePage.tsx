@@ -48,7 +48,7 @@ export const ColognePage = observer<ColognePageProps>((props: ColognePageProps) 
                 </div>
               </Card.Header>
               <Card.Body>
-                <Card.Text>{ cologne.Attributes.toString() }</Card.Text>
+                <Card.Text>{ store.selectedCologneAttributes.toString() }</Card.Text>
               </Card.Body>
             </Card>
           </Col>

@@ -1,4 +1,5 @@
-import {get, post} from '@tkrotoff/fetch';
+import { get, post } from '@tkrotoff/fetch';
+import ky from 'ky';
 
 export class API {
   baseURL: string;
@@ -23,6 +24,10 @@ export class API {
     if (purchasedQuantity === null || purchasedQuantity === undefined) purchasedQuantity = -1;
     formData.append('purchased_quantity', purchasedQuantity.toString());
     post(this.baseURL + 'colognes', formData);
+  }
+
+  async insertCologneAttributes(cologne: string, attributes: string[]) {
+    return ky.post(this.baseURL + 'colognes/' + cologne + '/attributes', { json: attributes });
   }
 
 }

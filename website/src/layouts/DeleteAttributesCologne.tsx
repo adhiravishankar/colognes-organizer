@@ -4,7 +4,6 @@ import { Button, Form, Modal } from 'react-bootstrap';
 
 import { Chips } from '../components/Chips';
 import { AppStore } from '../stores/AppStore';
-import {useNavigate} from "react-router";
 
 export interface AddAttrsCologneProps {
   store: AppStore;
@@ -15,7 +14,6 @@ export const AddAttributesCologne = observer<AddAttrsCologneProps>((props: AddAt
   const { addedAttributes, addAttributesModalShown } = store;
 
   const inputRef = useRef(null);
-  const navigation = useNavigate();
   const onHide = useCallback(() => store.setAddAttributesModalShown(false), [store]);
   const onPress = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
@@ -23,12 +21,7 @@ export const AddAttributesCologne = observer<AddAttrsCologneProps>((props: AddAt
       inputRef.current.value = '';
     }
   }, []);
-  const onSubmit = useCallback(() => {
-    const response = store.insertCologneAttributes();
-    if (response) {
-      navigation(0);
-    }
-  }, [store]);
+  const onSubmit = useCallback(() => store.insertCologneAttributes(), [store]);
 
   return (
     <Modal show={ addAttributesModalShown } onHide={ onHide }>
