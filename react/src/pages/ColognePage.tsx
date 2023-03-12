@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react-lite';
 import { Fragment, useCallback } from 'react';
 import { Card, Col, Container, Row } from 'react-bootstrap';
 
@@ -7,14 +6,8 @@ import { NavBar } from '../components/NavBar';
 import { PurchasedChip } from '../components/PurchasedChip';
 import { AddAttributesCologne } from '../layouts/AddAttributesCologne';
 import { AddCologne } from '../layouts/AddCologne';
-import { AppStore } from '../stores/AppStore';
 
-export interface ColognePageProps {
-  store: AppStore;
-}
-
-export const ColognePage = observer<ColognePageProps>((props: ColognePageProps) => {
-  const { store } = props;
+export const ColognePage = () => {
   const { selectedCologne: cologne } = store;
   const onAdd = useCallback(() => store.setAddModalShown(true), [store]);
   const onAddAttributes = useCallback(() => store.setAddAttributesModalShown(true), [store]);
@@ -54,8 +47,8 @@ export const ColognePage = observer<ColognePageProps>((props: ColognePageProps) 
           </Col>
         </Row>
       </Container>
-      <AddCologne store={ store } />
-      <AddAttributesCologne store={ store } />
+      <AddCologne />
+      <AddAttributesCologne />
     </Fragment>
   );
-});
+};

@@ -1,16 +1,9 @@
-import { observer } from 'mobx-react-lite';
 import { useCallback } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 
 import { Chips } from '../components/Chips';
-import { AppStore } from '../stores/AppStore';
 
-export interface AddAttrsCologneProps {
-  store: AppStore;
-}
-
-export const AddAttributesCologne = observer<AddAttrsCologneProps>((props: AddAttrsCologneProps) => {
-  const { store } = props;
+export const AddAttributesCologne = () => {
   const { addAttributesModalShown } = store;
 
   const onHide = useCallback(() => store.setAddAttributesModalShown(false), [store]);
@@ -28,5 +21,5 @@ export const AddAttributesCologne = observer<AddAttrsCologneProps>((props: AddAt
       </Modal.Body>
     </Modal>
   );
-});
+};
 

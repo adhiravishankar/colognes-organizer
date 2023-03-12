@@ -1,17 +1,10 @@
-import { observer } from 'mobx-react-lite';
 import { useCallback, useRef } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 
 import { Chips } from '../components/Chips';
-import { AppStore } from '../stores/AppStore';
 
-export interface AddAttrsCologneProps {
-  store: AppStore;
-}
-
-export const AddAttributesCologne = observer<AddAttrsCologneProps>((props: AddAttrsCologneProps) => {
-  const { store } = props;
+export const AddAttributesCologne = () => {
   const { addedAttributes, addAttributesModalShown } = store;
 
   const inputRef = useRef(null);
@@ -49,5 +42,5 @@ export const AddAttributesCologne = observer<AddAttrsCologneProps>((props: AddAt
       </Modal.Body>
     </Modal>
   );
-});
+};
 

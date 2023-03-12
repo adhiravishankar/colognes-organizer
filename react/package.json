@@ -6,24 +6,21 @@
     "build:components": "redrun --parallel build:sass build:tsc",
     "build:sass": "node sass-compile.js",
     "build:tsc": "tsc -p .",
-    "build:parcel": "parcel build/index.html --reporter @parcel/reporter-bundle-analyzer",
+    "build:parcel": "parcel public/index.html --reporter @parcel/reporter-bundle-analyzer",
     "lint": "eslint . --ext .ts,.tsx --fix"
   },
   "dependencies": {
-    "@tkrotoff/fetch": "^0.15.0",
-    "filepond": "^4.30.4",
     "ky": "^0.33.1",
     "material-colors": "^1.2.6",
-    "mobx": "^6.7.0",
-    "mobx-react-lite": "^3.4.0",
     "queue-typescript": "^1.0.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
-    "react-filepond": "^7.1.2",
     "react-hook-form": "^7.41.1",
     "react-router": "^6.6.1",
-    "react-router-dom": "^6.6.1"
+    "react-router-dom": "^6.6.1",
+    "swr": "^2.1.0",
+    "unstated-next": "^1.1.0"
   },
   "devDependencies": {
     "@parcel/reporter-bundle-analyzer": "^2.8.2",

@@ -1,5 +1,7 @@
-import { get, post } from '@tkrotoff/fetch';
 import ky from 'ky';
+import useSWR from 'swr';
+
+const fetcher = url => fetch(url).then(r => r.json());
 
 export class API {
   baseURL: string;
@@ -9,11 +11,11 @@ export class API {
   }
 
   getColognes() {
-    return get(this.baseURL + 'colognes').json();
+    return useSWR(this.baseURL + 'colognes', fetcher);
   }
 
   getCologne(cologne: string) {
-    return get(this.baseURL + 'colognes/' + cologne).json();
+    return useSWR(this.baseURL + 'colognes/' + cologne, fetcher);
   }
 
   insertCologne(name: string, manufacturer: string, purchased: boolean, purchasedQuantity?: number) {
@@ -23,7 +25,7 @@ export class API {
     formData.append('purchased', purchased ? 'true' : 'false');
     if (purchasedQuantity === null || purchasedQuantity === undefined) purchasedQuantity = -1;
     formData.append('purchased_quantity', purchasedQuantity.toString());
-    post(this.baseURL + 'colognes', formData);
+    ky.post(this.baseURL + 'colognes', { body: formData });
   }
 
   async insertCologneAttributes(cologne: string, attributes: string[]) {
