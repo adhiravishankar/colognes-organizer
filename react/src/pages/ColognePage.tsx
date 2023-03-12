@@ -6,12 +6,17 @@ import { NavBar } from '../components/NavBar';
 import { PurchasedChip } from '../components/PurchasedChip';
 import { AddAttributesCologne } from '../layouts/AddAttributesCologne';
 import { AddCologne } from '../layouts/AddCologne';
+import { ColognesContainer } from '../stores/ColognesStore';
+import { ModalsContainer } from '../stores/ModalsStore';
 
 export const ColognePage = () => {
-  const { selectedCologne: cologne } = store;
-  const onAdd = useCallback(() => store.setAddModalShown(true), [store]);
-  const onAddAttributes = useCallback(() => store.setAddAttributesModalShown(true), [store]);
-  const onDeleteAttributes = useCallback(() => store.setDeleteAttributesModalShown(true), [store]);
+  const colognesStore = ColognesContainer.useContainer();
+  const modalsStore = ModalsContainer.useContainer();
+  const cologne = colognesStore.selectedCologne;
+  
+  const onAdd = useCallback(() => modalsStore.setAddCologneModalShown(true), []);
+  const onAddAttributes = useCallback(() => modalsStore.setAddAttributeModalShown(true), []);
+  const onDeleteAttributes = useCallback(() => modalsStore.setDeleteAttributesModalShown(true), []);
   return (
     <Fragment>
       <NavBar name="Colognes" editIcon={ false } onAdd={ onAdd } />

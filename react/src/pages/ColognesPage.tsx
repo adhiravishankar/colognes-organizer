@@ -7,15 +7,17 @@ import { LabeledImageItem } from '../components/LabeledImageItem';
 import { NavBar } from '../components/NavBar';
 import { AddCologne } from '../layouts/AddCologne';
 import { Cologne } from '../models/Cologne';
+import { ColognesContainer } from '../stores/ColognesStore';
+import { ModalsContainer } from '../stores/ModalsStore';
 
 export const ColognesPage = () => {
   const navigation = useNavigate();
+  const modalsStore = ModalsContainer.useContainer();
+  const colognesStore = ColognesContainer.useContainer();
 
-  const colognesJSX: JSX.Element[] = [];
-  const onAdd = useCallback(() => store.setAddModalShown(true), [store]);
-
-  const onClick = useCallback((id: string) => navigation('/colognes/' + id), [store]);
-  store.colognes.forEach((cologne: Cologne) => colognesJSX.push(<LabeledImageItem onClick={ onClick } name={ cologne.Name } id={ cologne.Id } />));
+  const onAdd = useCallback(() => modalsStore.setAddCologneModalShown(true), []);
+  const onClick = useCallback((id: string) => navigation('/colognes/' + id), []);
+  const colognesJSX = colognesStore.colognes.map((cologne: Cologne) => <LabeledImageItem onClick={ onClick } name={ cologne.Name } id={ cologne.Id } />);
 
   return (
     <Fragment>

@@ -9,7 +9,7 @@ export const AddAttributesCologne = () => {
 
   const inputRef = useRef(null);
   const navigation = useNavigate();
-  const onHide = useCallback(() => store.setAddAttributesModalShown(false), [store]);
+  const onHide = useCallback(() => store.setAddAttributesModalShown(false), []);
   const onPress = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       addedAttributes.push(inputRef.current.value);
@@ -21,8 +21,8 @@ export const AddAttributesCologne = () => {
     if (response) {
       navigation(0);
     }
-  }, [store]);
-  const onDeleteHandler = useCallback((id: string, text: string) => store.deleteRecentlyAddedChip(text), [store]);
+  }, []);
+  const onDeleteHandler = useCallback((id: string, text: string) => store.deleteRecentlyAddedChip(text), []);
 
   return (
     <Modal show={ addAttributesModalShown } onHide={ onHide }>

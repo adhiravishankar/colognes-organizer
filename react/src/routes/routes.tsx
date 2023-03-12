@@ -14,9 +14,7 @@ export function createRouter() {
     },
     {
       path: '/colognes/:cologne',
-      loader: async ({ params }) => {
-        // @ts-ignore
-        await store.getCologne(params.cologne);
+      loader: async () => {
         return null;
       },
       element: <ColognePage />,

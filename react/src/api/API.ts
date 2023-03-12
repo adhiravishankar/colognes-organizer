@@ -6,8 +6,12 @@ const fetcher = url => fetch(url).then(r => r.json());
 export class API {
   baseURL: string;
 
-  constructor(baseURL: string) {
-    this.baseURL = baseURL;
+  constructor() {
+    this.baseURL = process.env.BASE_URL;
+  }
+
+  getManufacturers() {
+    return useSWR(this.baseURL + 'manufacturers', fetcher);
   }
 
   getColognes() {

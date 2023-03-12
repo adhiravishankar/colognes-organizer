@@ -2,11 +2,7 @@
   "name": "@adhiravishankar/colognes-organizer",
   "version": "1.0.0",
   "scripts": {
-    "build": "redrun --series build:components build:parcel",
-    "build:components": "redrun --parallel build:sass build:tsc",
-    "build:sass": "node sass-compile.js",
-    "build:tsc": "tsc -p .",
-    "build:parcel": "parcel public/index.html --reporter @parcel/reporter-bundle-analyzer",
+    "start": "parcel serve build/index.html",
     "lint": "eslint . --ext .ts,.tsx --fix"
   },
   "dependencies": {
