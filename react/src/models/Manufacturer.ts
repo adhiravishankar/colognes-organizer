@@ -1,3 +1,6 @@
+/**
+ * Represents a cologne Manufacturer model
+ */
 export interface Manufacturer {
   id: string;
 

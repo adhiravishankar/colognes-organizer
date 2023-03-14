@@ -1,5 +1,6 @@
-
-
+/**
+ * Cologne model to represent a singular cologne.
+ */
 export interface Cologne {
   Id: string;
 

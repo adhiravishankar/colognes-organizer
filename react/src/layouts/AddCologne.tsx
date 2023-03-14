@@ -2,24 +2,24 @@ import { useCallback } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { Controller, useController, useForm } from 'react-hook-form';
 
+import { API } from '../api/API';
 import { Cologne } from '../models/Cologne';
-import { ColognesContainer } from '../stores/ColognesStore';
 import { ModalsContainer } from '../stores/ModalsStore';
 
 export const AddCologne = () => {
   const { handleSubmit, control } = useForm<Cologne>();
-  const ColognesStore = ColognesContainer.useContainer();
+  const api = new API();
   const ModalsStore = ModalsContainer.useContainer();
   
   
   const purchasedController = useController({ name: 'Purchased', control });
   const disabledPurchased: boolean = !purchasedController.field.value;
 
-  const onHide = useCallback(() => ModalsStore.setAddCologneModalShown(false), []);
-  const onSubmit = useCallback((data: Cologne) => store.api.insertCologne(data.Name, data.Manufacturer, data.Purchased, data.PurchasedQuantity), []);
+  const onHide = useCallback(() => ModalsStore.addAttributeModal.setFalse(), []);
+  const onSubmit = useCallback((data: Cologne) => api.insertCologne(data.Name, data.Manufacturer, data.Purchased, data.PurchasedQuantity), []);
 
   return (
-    <Modal show={ModalsStore.addCologneModal} onHide={onHide}>
+    <Modal show={ModalsStore.addCologneModal.value} onHide={onHide}>
       <Modal.Header closeButton>
         <Modal.Title>Add Cologne</Modal.Title>
       </Modal.Header>

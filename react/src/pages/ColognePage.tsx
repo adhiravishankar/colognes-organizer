@@ -14,9 +14,9 @@ export const ColognePage = () => {
   const modalsStore = ModalsContainer.useContainer();
   const cologne = colognesStore.selectedCologne;
   
-  const onAdd = useCallback(() => modalsStore.setAddCologneModalShown(true), []);
-  const onAddAttributes = useCallback(() => modalsStore.setAddAttributeModalShown(true), []);
-  const onDeleteAttributes = useCallback(() => modalsStore.setDeleteAttributesModalShown(true), []);
+  const onAdd = useCallback(() => modalsStore.addCologneModal.setTrue(), []);
+  const onAddAttributes = useCallback(() => modalsStore.addAttributeModal.setTrue(), []);
+  const onDeleteAttributes = useCallback(() => modalsStore.deleteAttributesModal.setTrue(), []);
   return (
     <Fragment>
       <NavBar name="Colognes" editIcon={ false } onAdd={ onAdd } />

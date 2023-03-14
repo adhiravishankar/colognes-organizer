@@ -15,7 +15,7 @@ export const ColognesPage = () => {
   const modalsStore = ModalsContainer.useContainer();
   const colognesStore = ColognesContainer.useContainer();
 
-  const onAdd = useCallback(() => modalsStore.setAddCologneModalShown(true), []);
+  const onAdd = useCallback(() => modalsStore.addCologneModal.setTrue(), []);
   const onClick = useCallback((id: string) => navigation('/colognes/' + id), []);
   const colognesJSX = colognesStore.colognes.map((cologne: Cologne) => <LabeledImageItem onClick={ onClick } name={ cologne.Name } id={ cologne.Id } />);
 

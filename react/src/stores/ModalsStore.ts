@@ -1,12 +1,12 @@
-import { useState } from 'react';
 import { createContainer } from 'unstated-next';
+import { useBoolean } from 'usehooks-ts';
 
 export function useModalsStore() {
-  let [addAttributeModal, setAddAttributeModalShown] = useState<boolean>(false);
-  let [addCologneModal, setAddCologneModalShown] = useState<boolean>(false);
-  let [deleteAttributesModal, setDeleteAttributesModalShown] = useState<boolean>(false);
+  let addAttributeModal = useBoolean(false);
+  let addCologneModal = useBoolean(false);
+  let deleteAttributesModal = useBoolean(false);
 
-  return { addAttributeModal, setAddAttributeModalShown, addCologneModal, setAddCologneModalShown, deleteAttributesModal, setDeleteAttributesModalShown };
+  return { addAttributeModal, addCologneModal, deleteAttributesModal };
 }
 
 export const ModalsContainer = createContainer(useModalsStore);

@@ -1,16 +1,18 @@
-import { useCallback, useRef } from 'react';
+import { KeyboardEvent, useCallback, useRef } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 
 import { Chips } from '../components/Chips';
+import { ModalsContainer } from '../stores/ModalsStore';
 
 export const AddAttributesCologne = () => {
+  const modalsStore = ModalsContainer.useContainer();
   const { addedAttributes, addAttributesModalShown } = store;
 
   const inputRef = useRef(null);
   const navigation = useNavigate();
-  const onHide = useCallback(() => store.setAddAttributesModalShown(false), []);
-  const onPress = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
+  const onHide = useCallback(() => modalsStore.addAttributeModal.setFalse(), []);
+  const onPress = useCallback((event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       addedAttributes.push(inputRef.current.value);
       inputRef.current.value = '';
